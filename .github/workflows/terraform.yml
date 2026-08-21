@@ -42,6 +42,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Format
+        working-directory: ./Environment/Dev
         run: terraform fmt -check -recursive
 
       - name: Terraform Validate
