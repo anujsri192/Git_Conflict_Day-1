@@ -38,17 +38,21 @@ jobs:
           terraform_version: 1.14.6
 
       - name: Terraform Init
+        working-directory: ./Environment/Dev
         run: terraform init
 
       - name: Terraform Format
         run: terraform fmt -check -recursive
 
       - name: Terraform Validate
+        working-directory: ./Environment/Dev
         run: terraform validate
 
       - name: Terraform Plan
+        working-directory: ./Environment/Dev
         run: terraform plan -out=tfplan
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        working-directory: ./Environment/Dev
         run: terraform apply -auto-approve tfplan
