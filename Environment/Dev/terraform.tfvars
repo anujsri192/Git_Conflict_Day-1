@@ -10,6 +10,11 @@ resource_groups = {
     managed_by = "ram"
   }
   ra3 = {
+    name       = "rg-mohan"
+    location   = "Japan West"
+    managed_by = "ram"
+  }
+  ra4 ={
     name       = "rg-sohan"
     location   = "Japan West"
     managed_by = "ram"
