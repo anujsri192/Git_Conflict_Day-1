@@ -9,6 +9,11 @@ resource_groups = {
     location   = "Japan West"
     managed_by = "ram"
   }
+  ra3 = {
+    name       = "rg-mohan"
+    location   = "Japan West"
+    managed_by = "ram"
+  }
 }
 virtual_networks = {
   vnet1 = {
