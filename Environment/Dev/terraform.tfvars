@@ -4,7 +4,7 @@ resource_groups = {
     location   = "Japan East"
     managed_by = "krishna"
   }
-  ra2 = {
+  ra2 = { 
     name       = "rg1102"
     location   = "Japan West"
     managed_by = "ram"
