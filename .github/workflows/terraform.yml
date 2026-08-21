@@ -4,28 +4,27 @@ on:
   push:
     branches:
       - main
+      - 'feature/**'
 
   pull_request:
     branches:
       - main
+
+  workflow_dispatch:
 
 permissions:
   id-token: write
   contents: read
 
 jobs:
-
   terraform:
     name: Terraform
     runs-on: ubuntu-latest
 
     steps:
-
-      # 1. Checkout Repository
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      # 2. Azure Login
       - name: Azure Login
         uses: azure/login@v2
         with:
@@ -33,29 +32,23 @@ jobs:
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      # 3. Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.9.8
 
-      # 4. Terraform Init
       - name: Terraform Init
         run: terraform init
 
-      # 5. Terraform Format Check
       - name: Terraform Format
         run: terraform fmt -check -recursive
 
-      # 6. Terraform Validate
       - name: Terraform Validate
         run: terraform validate
 
-      # 7. Terraform Plan
       - name: Terraform Plan
         run: terraform plan -out=tfplan
 
-      # 8. Terraform Apply
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve tfplan
